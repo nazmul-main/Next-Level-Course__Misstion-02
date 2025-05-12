@@ -73,3 +73,21 @@
 ### Combined Usage
 - These operators can be combined for range queries
 - Example: `db.products.find({ price: { $gte: 10, $lte: 50 } })`
+  
+# 5-4 $in, $nin, Implicit AND Condition
+
+## $in (In)
+- Matches any values that exist in a specified array
+- Syntax: `{ field: { $in: [value1, value2, ...] } }`
+- Example: `db.products.find({ category: { $in: ["electronics", "computers"] } })`
+
+## $nin (Not In)
+- Matches none of the values specified in an array
+- Syntax: `{ field: { $nin: [value1, value2, ...] } }`
+- Example: `db.products.find({ status: { $nin: ["discontinued", "out-of-stock"] } })`
+
+## Implicit AND Condition
+- Multiple conditions in a query document create an implicit AND operation
+- Syntax: `{ field1: value1, field2: value2 }`
+- Example: `db.users.find({ age: { $gte: 18 }, status: "active" })`
+- All conditions must be true for a document to match
