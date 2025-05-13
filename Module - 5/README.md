@@ -154,6 +154,7 @@
 - Matches documents that contain an array element meeting multiple criteria
 - Syntax: `{ field: { $elemMatch: { <query1>, <query2>, ... } } }`
 - Example: `db.products.find({ specs: { $elemMatch: { color: "red", size: "large" } } })`
+
 # 5-8 $set, $addToSet, $push
 
 ## $set
@@ -170,3 +171,25 @@
 - Adds elements to an array
 - Syntax: `{ $push: { field: value } }`
 - Example: `db.posts.updateOne({ _id: 1 }, { $push: { comments: { text: "Great post!" } } })`
+
+# 5-9 $unset, $pop, $pull, $pullAll
+
+## $unset
+- Removes specified fields from a document
+- Syntax: `{ $unset: { field: "" } }`
+- Example: `db.users.updateOne({ _id: 1 }, { $unset: { temporary_field: "" } })`
+
+## $pop
+- Removes first or last element of an array
+- Syntax: `{ $pop: { field: 1 } }` (last element) or `{ $pop: { field: -1 } }` (first element)
+- Example: `db.posts.updateOne({ _id: 1 }, { $pop: { comments: 1 } })`
+
+## $pull
+- Removes all array elements that match a specified condition
+- Syntax: `{ $pull: { field: value } }`
+- Example: `db.products.updateOne({ _id: 1 }, { $pull: { tags: "old" } })`
+
+## $pullAll
+- Removes all matching values from an array
+- Syntax: `{ $pullAll: { field: [ value1, value2, ... ] } }`
+- Example: `db.inventory.updateOne({ _id: 1 }, { $pullAll: { tags: ["expired", "discontinued"] } })`
