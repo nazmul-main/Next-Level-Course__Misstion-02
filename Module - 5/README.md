@@ -193,3 +193,39 @@
 - Removes all matching values from an array
 - Syntax: `{ $pullAll: { field: [ value1, value2, ... ] } }`
 - Example: `db.inventory.updateOne({ _id: 1 }, { $pullAll: { tags: ["expired", "discontinued"] } })`
+# 5-11 Delete Documents, Drop Collection and Self-Exploration
+
+## Delete Documents
+
+### deleteOne
+- Removes a single document that matches the filter
+- Syntax: `db.collection.deleteOne(filter)`
+- Example: `db.users.deleteOne({ status: "inactive" })`
+
+### deleteMany
+- Removes all documents that match the filter
+- Syntax: `db.collection.deleteMany(filter)`
+- Example: `db.products.deleteMany({ category: "discontinued" })`
+
+## Drop Collection
+- Removes an entire collection including all documents
+- Syntax: `db.collection.drop()`
+- Example: `db.temporary_collection.drop()`
+
+## Self-Exploration Tips
+
+### MongoDB Documentation
+- Visit official MongoDB documentation (docs.mongodb.com)
+- Read through examples and use cases
+- Practice in MongoDB Shell
+
+### MongoDB Compass
+- Use MongoDB Compass GUI for visual exploration
+- Test queries in the query builder
+- Analyze query performance
+
+### Best Practices
+- Always test queries on sample data first
+- Use appropriate indexes for better performance
+- Regular backups before major operations
+- Monitor query execution plans
