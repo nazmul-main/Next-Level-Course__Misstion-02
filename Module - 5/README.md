@@ -91,3 +91,37 @@
 - Syntax: `{ field1: value1, field2: value2 }`
 - Example: `db.users.find({ age: { $gte: 18 }, status: "active" })`
 - All conditions must be true for a document to match
+
+# 5-5 $and, $or, $not, $nor implicit vs explicit - Logical Operators
+
+## $and Operator
+- Explicitly combines multiple conditions with AND logic
+- Syntax: `{ $and: [ { condition1 }, { condition2 }, ... ] }`
+- Example: `db.users.find({ $and: [{ age: { $gte: 18 } }, { status: "active" }] })`
+
+## $or Operator
+- Combines conditions with OR logic
+- Syntax: `{ $or: [ { condition1 }, { condition2 }, ... ] }`
+- Example: `db.products.find({ $or: [{ price: { $lt: 100 } }, { category: "sale" }] })`
+
+## $not Operator
+- Inverts the effect of a query expression
+- Syntax: `{ field: { $not: { <operator-expression> } } }`
+- Example: `db.inventory.find({ price: { $not: { $gt: 100 } } })`
+
+## $nor Operator
+- Joins query clauses with a logical NOR
+- Returns documents that fail all specified conditions
+- Syntax: `{ $nor: [ { condition1 }, { condition2 }, ... ] }`
+- Example: `db.products.find({ $nor: [{ price: { $lt: 50 } }, { sale: true }] })`
+
+## Implicit vs Explicit AND
+### Implicit AND
+- Using comma-separated conditions
+- More concise for simple queries
+- Example: `db.users.find({ age: { $gte: 18 }, status: "active" })`
+
+### Explicit AND ($and)
+- More flexible for complex conditions
+- Required when using same field multiple times
+- Example: `db.inventory.find({ $and: [{ qty: { $gt: 100 } }, { qty: { $lt: 250 } }] })`
