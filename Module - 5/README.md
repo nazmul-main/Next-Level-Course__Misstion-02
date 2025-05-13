@@ -125,6 +125,7 @@
 - More flexible for complex conditions
 - Required when using same field multiple times
 - Example: `db.inventory.find({ $and: [{ qty: { $gt: 100 } }, { qty: { $lt: 250 } }] })`
+
 # 5-6 $exists, $type, $size
 
 ## $exists
@@ -141,3 +142,15 @@
 - Matches arrays with specified number of elements
 - Syntax: `{ field: { $size: <number> } }`
 - Example: `db.products.find({ tags: { $size: 3 } })`
+
+# 5-7 $all, $elemMatch
+
+## $all
+- Matches arrays that contain all specified elements
+- Syntax: `{ field: { $all: [value1, value2, ...] } }`
+- Example: `db.products.find({ tags: { $all: ["electronics", "wireless"] } })`
+
+## $elemMatch
+- Matches documents that contain an array element meeting multiple criteria
+- Syntax: `{ field: { $elemMatch: { <query1>, <query2>, ... } } }`
+- Example: `db.products.find({ specs: { $elemMatch: { color: "red", size: "large" } } })`
