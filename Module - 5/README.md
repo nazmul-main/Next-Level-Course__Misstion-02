@@ -125,3 +125,19 @@
 - More flexible for complex conditions
 - Required when using same field multiple times
 - Example: `db.inventory.find({ $and: [{ qty: { $gt: 100 } }, { qty: { $lt: 250 } }] })`
+# 5-6 $exists, $type, $size
+
+## $exists
+- Matches documents that have the specified field
+- Syntax: `{ field: { $exists: <boolean> } }`
+- Example: `db.inventory.find({ qty: { $exists: true } })`
+
+## $type
+- Matches documents where the field is of specified BSON type
+- Syntax: `{ field: { $type: <BSON type> } }`
+- Example: `db.users.find({ age: { $type: "number" } })`
+
+## $size
+- Matches arrays with specified number of elements
+- Syntax: `{ field: { $size: <number> } }`
+- Example: `db.products.find({ tags: { $size: 3 } })`
