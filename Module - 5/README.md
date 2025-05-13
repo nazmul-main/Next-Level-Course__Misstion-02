@@ -154,3 +154,19 @@
 - Matches documents that contain an array element meeting multiple criteria
 - Syntax: `{ field: { $elemMatch: { <query1>, <query2>, ... } } }`
 - Example: `db.products.find({ specs: { $elemMatch: { color: "red", size: "large" } } })`
+# 5-8 $set, $addToSet, $push
+
+## $set
+- Updates or adds a field's value
+- Syntax: `{ $set: { field: value } }`
+- Example: `db.users.updateOne({ _id: 1 }, { $set: { status: "active" } })`
+
+## $addToSet
+- Adds elements to an array only if they don't exist
+- Syntax: `{ $addToSet: { field: value } }`
+- Example: `db.products.updateOne({ _id: 1 }, { $addToSet: { tags: "new" } })`
+
+## $push
+- Adds elements to an array
+- Syntax: `{ $push: { field: value } }`
+- Example: `db.posts.updateOne({ _id: 1 }, { $push: { comments: { text: "Great post!" } } })`
