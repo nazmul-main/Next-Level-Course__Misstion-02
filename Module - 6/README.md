@@ -31,3 +31,22 @@
 - Can update existing documents or insert new ones
 - Syntax: `{ $merge: { into: "<collection>", on: "<field>" } }`
 - Example: `{ $merge: { into: "target", on: "_id" } }`
+# 6-3 $group, $sum, $push Aggregation Stage
+
+## $group Stage
+- Groups documents by specified expression
+- Performs aggregations on grouped data
+- Syntax: `{ $group: { _id: <expression>, <field>: { <accumulator>: <expression> } } }`
+- Example: `{ $group: { _id: "$category", count: { $sum: 1 } } }`
+
+## $sum Operator
+- Calculates sum of numeric values for grouped documents
+- Returns total when used with $group
+- Syntax: `{ $sum: <expression> }`
+- Example: `{ $group: { _id: "$department", totalSalary: { $sum: "$salary" } } }`
+
+## $push Operator
+- Creates an array of values from grouped documents
+- Adds field values to array for each document
+- Syntax: `{ $push: <expression> }`
+- Example: `{ $group: { _id: "$category", items: { $push: "$name" } } }`
