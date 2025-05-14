@@ -84,3 +84,21 @@
 - Returns difference when used with $group
 - Syntax: `{ $subtract: [ <expression1>, <expression2> ] }`
 - Example: `{ $group: { _id: "$order", profit: { $subtract: ["$revenue", "$cost"] } } }`
+# 6-5 Explore $group with $unwind aggregation stage
+
+## $unwind Stage
+- Deconstructs an array field to create separate documents
+- Creates a new document for each element in the array
+- Syntax: `{ $unwind: <field path> }`
+- Example: `{ $unwind: "$tags" }`
+
+## Using $unwind with $group
+- Commonly used to group array elements after unwinding
+- Enables aggregation on array elements
+- Syntax: `{ $unwind: <arrayField>, $group: { _id: <expression>, <field>: { <accumulator>: <expression> } } }`
+- Example: `{
+    $unwind: "$interests"
+},
+{
+    $group: { _id: "$age", interestsPerAge: {$push: "$interests"}}
+}`
