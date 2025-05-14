@@ -31,6 +31,7 @@
 - Can update existing documents or insert new ones
 - Syntax: `{ $merge: { into: "<collection>", on: "<field>" } }`
 - Example: `{ $merge: { into: "target", on: "_id" } }`
+
 # 6-3 $group, $sum, $push Aggregation Stage
 
 ## $group Stage
@@ -50,3 +51,36 @@
 - Adds field values to array for each document
 - Syntax: `{ $push: <expression> }`
 - Example: `{ $group: { _id: "$category", items: { $push: "$name" } } }`
+
+# 6-4 Advanced $group & $project Operations
+## Aggregation Operators with $group
+
+### $sum
+- Calculates sum of numeric values for grouped documents
+- Returns total when used with $group
+- Syntax: `{ $sum: <expression> }`
+- Example: `{ $group: { _id: "$department", totalSalary: { $sum: "$salary" } } }`
+
+### $max
+- Finds maximum value in grouped documents
+- Returns highest value when used with $group
+- Syntax: `{ $max: <expression> }`
+- Example: `{ $group: { _id: "$department", highestSalary: { $max: "$salary" } } }`
+
+### $min
+- Finds minimum value in grouped documents
+- Returns lowest value when used with $group
+- Syntax: `{ $min: <expression> }`
+- Example: `{ $group: { _id: "$store", lowestPrice: { $min: "$price" } } }`
+
+### $avg
+- Calculates average of numeric values in grouped documents
+- Returns mean value when used with $group
+- Syntax: `{ $avg: <expression> }`
+- Example: `{ $group: { _id: "$class", averageScore: { $avg: "$score" } } }`
+
+### $subtract
+- Subtracts two numeric values in grouped documents
+- Returns difference when used with $group
+- Syntax: `{ $subtract: [ <expression1>, <expression2> ] }`
+- Example: `{ $group: { _id: "$order", profit: { $subtract: ["$revenue", "$cost"] } } }`
