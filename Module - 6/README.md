@@ -84,6 +84,7 @@
 - Returns difference when used with $group
 - Syntax: `{ $subtract: [ <expression1>, <expression2> ] }`
 - Example: `{ $group: { _id: "$order", profit: { $subtract: ["$revenue", "$cost"] } } }`
+
 # 6-5 Explore $group with $unwind aggregation stage
 
 ## $unwind Stage
@@ -102,3 +103,23 @@
 {
     $group: { _id: "$age", interestsPerAge: {$push: "$interests"}}
 }`
+
+# 6-6 $bucket, $sort, and $limit aggregation stage
+
+## $bucket Stage
+- Groups documents into buckets based on specified boundaries
+- Creates categories for data analysis
+- Syntax: `{ $bucket: { groupBy: <expression>, boundaries: [<array>], default: <literal> } }`
+- Example: `{ $bucket: { groupBy: "$age", boundaries: [0, 18, 30, 50, 80], default: "Other" } }`
+
+## $sort Stage
+- Sorts documents based on specified fields
+- Can sort in ascending (1) or descending (-1) order
+- Syntax: `{ $sort: { <field>: <1 or -1> } }`
+- Example: `{ $sort: { age: -1, name: 1 } }`
+
+## $limit Stage
+- Limits the number of documents passed to the next stage
+- Useful for pagination and top-N queries
+- Syntax: `{ $limit: <positive integer> }`
+- Example: `{ $limit: 5 }`
