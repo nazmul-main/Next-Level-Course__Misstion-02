@@ -123,6 +123,7 @@
 - Useful for pagination and top-N queries
 - Syntax: `{ $limit: <positive integer> }`
 - Example: `{ $limit: 5 }`
+
 # 6-7 $facet Multiple Pipeline Aggregation Stage
 
 ## $facet Stage
@@ -146,3 +147,23 @@
         salesByCategory: [{$match: {status: "completed"}}, {$group: {_id: "$category", total: {$sum: "$amount"}}}]                                          
     }
 }`
+
+# 6-8 $lookup stage, embedding vs referencing
+
+## $lookup Stage
+- Performs a left outer join with another collection
+- Adds a new array field containing matching documents
+- Useful for combining data from multiple collections
+- Syntax: `{ $lookup: { from: <collection>, localField: <field>, foreignField: <field>, as: <output array field> } }`
+- Example: `{ $lookup: { from: "orders", localField: "_id", foreignField: "userId", as: "userOrders" } }`
+
+## Data Modeling: Embedding vs Referencing
+
+### Embedding
+- Stores related data in a single document
+- Better for data that is queried together frequently
+- Advantages:
+  - Single query retrieves all related data
+  - Better performance for read operations
+  - Maintains data atomicity
+- Example:
