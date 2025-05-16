@@ -167,6 +167,7 @@
   - Better performance for read operations
   - Maintains data atomicity
 - Example:
+
 # 6-9 What is indexing, COLLSCAN vs IXSCAN
 
 ## Indexing in MongoDB
@@ -198,3 +199,19 @@
 - Avoid creating unnecessary indexes
 - Monitor index usage and performance
 - Consider the impact on write operations
+
+# 6-10 Explore compound index and text index
+
+## Compound Index
+- Index on multiple fields
+- Order of fields in index matters
+- Supports queries on multiple fields
+- Syntax: `db.collection.createIndex({ field1: 1, field2: -1 })`
+- Example: `db.users.createIndex({ age: 1, name: 1 })`
+
+## Text Index
+- Enables text search queries
+- Only one text index per collection
+- Supports language-specific text search
+- Syntax: `db.collection.createIndex({ field: "text" })`
+- Example: `db.articles.createIndex({ content: "text", title: "text" })`
