@@ -123,3 +123,26 @@
 - Useful for pagination and top-N queries
 - Syntax: `{ $limit: <positive integer> }`
 - Example: `{ $limit: 5 }`
+# 6-7 $facet Multiple Pipeline Aggregation Stage
+
+## $facet Stage
+- Processes multiple aggregation pipelines within a single stage
+- Allows parallel execution of different aggregation operations
+- Each facet can have its own pipeline stages
+- Outputs results in separate fields
+### Syntax
+- `{
+    $facet: {
+        <field1>: [<pipeline1>],
+        <field2>: [<pipeline2>],
+        ...
+    }
+}`
+### Example
+- `{
+    $facet: {
+        totalSales: [{$match: {status: "completed"}}, {$group: {_id: null, total: {$sum: "$amount"}}}],
+        averageSales: [{$match: {status: "completed"}}, {$group: {_id: null, average: {$avg: "$amount"}}}],
+        salesByCategory: [{$match: {status: "completed"}}, {$group: {_id: "$category", total: {$sum: "$amount"}}}]                                          
+    }
+}`
