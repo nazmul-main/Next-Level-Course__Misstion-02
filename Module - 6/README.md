@@ -167,3 +167,34 @@
   - Better performance for read operations
   - Maintains data atomicity
 - Example:
+# 6-9 What is indexing, COLLSCAN vs IXSCAN
+
+## Indexing in MongoDB
+- Special data structure that stores a small portion of the collection's data
+- Improves query performance by reducing the number of documents to scan
+- Supports efficient execution of queries in MongoDB
+
+## COLLSCAN vs IXSCAN
+### COLLSCAN (Collection Scan)
+- Scans entire collection to find matching documents
+- Slower performance, especially for large collections
+- Used when no suitable index exists for the query
+
+### IXSCAN (Index Scan)
+- Uses index to find matching documents
+- Much faster than COLLSCAN
+- Only scans relevant portions of the index
+- Optimal for query performance
+
+## Index Types
+- Single Field Index
+- Compound Index
+- Multikey Index
+- Text Index
+- Geospatial Index
+
+## Best Practices
+- Create indexes to support common queries
+- Avoid creating unnecessary indexes
+- Monitor index usage and performance
+- Consider the impact on write operations
