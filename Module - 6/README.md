@@ -215,3 +215,4 @@
 - Supports language-specific text search
 - Syntax: `db.collection.createIndex({ field: "text" })`
 - Example: `db.articles.createIndex({ content: "text", title: "text" })`
+
