@@ -1,4 +1,5 @@
-# Node.js Overview
+# 7-1 What is Nodejs , a high level overview of node.js
+## Node.js Overview
 
 Node.js is a powerful open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside of a web browser. Here's a high-level overview of Node.js:
 
@@ -24,3 +25,15 @@ Node.js is a powerful open-source, cross-platform JavaScript runtime environment
 - Rich ecosystem of packages
 - Easy learning curve for JavaScript developers
 - Excellent for scalable network applications
+# 7-2 What is module, commonjs vs esm
+## Modules in Node.js
+
+Node.js uses a modular system to organize and reuse code. There are two main module formats:
+
+### CommonJS vs ESM
+
+#### CommonJS (Traditional Node.js)
+- Uses `require()` and `module.exports`
+- Synchronous module loading
+- Default in Node.js
+- Example:
