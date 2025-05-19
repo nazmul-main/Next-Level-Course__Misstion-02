@@ -37,3 +37,37 @@ Node.js uses a modular system to organize and reuse code. There are two main mod
 - Synchronous module loading
 - Default in Node.js
 - Example:
+#7-3 File System Module: Synchronous vs Asynchronous**
+
+- Added explanatory notes highlighting the key differences between synchronous and asynchronous methods in Node.js `fs` module.
+- Covered practical examples to demonstrate how blocking (sync) and non-blocking (async) operations behave.
+- Included use cases and performance considerations to help choose the appropriate method based on project requirements.
+- Syntax:
+  ```javascript
+  const fs = require('fs');
+
+  // Asynchronous file reading
+  fs.readFile('example.txt', 'utf8', (err, data) => {
+    if (err) {
+      return console.error(err);
+    }
+    console.log(data);
+  });
+
+  console.log('This line is printed before file reading completes');
+  ```
+
+  ```javascript
+  // Synchronous file reading
+  const fs = require('fs');
+
+  try {
+    const data = fs.readFileSync('example.txt', 'utf8');
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+
+  console.log('This line is printed after file reading completes');
+  ```
+
