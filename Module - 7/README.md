@@ -69,8 +69,55 @@ Node.js uses a modular system to organize and reuse code. There are two main mod
   }
 
   console.log('This line is printed after file reading completes');
-  ```
 
 
-asdfa4asdfgadfg
+
+# 7-4 Event Driven Architecture
+
+Node.js uses an event-driven architecture where certain types of objects (called "emitters") can emit named events that cause listeners to be called.
+
+## Event Emitter
+
+The EventEmitter class is at the core of Node.js event-driven architecture. Here's how it works:
+
+### Basic Example
+
+```javascript
+// Import the events module
+const EventEmitter = require("events");
+
+// Create an instance of EventEmitter
+const myEmitter = new EventEmitter();
+
+// Register event listeners for 'birthday' event
+myEmitter.on("birthday", () => {
+  console.log("Happy Birthday To You");
+});
+
+// Event listeners can receive parameters
+myEmitter.on("birthday", (gift) => {
+  console.log(`I will send a gift that is: ${gift}`);
+});
+
+// Emit the 'birthday' event with a parameter
+myEmitter.emit("birthday", "Watch");
+
+# 7-5 Stream and Buffer, Create Your Own Server
+
+## Streams and Buffers
+
+Streams and buffers are fundamental concepts in Node.js for handling data:
+
+### Buffers
+- Raw binary data storage
+- Fixed-size chunks of memory
+- Used when working with binary data
+
+### Streams
+- Handle reading/writing data sequentially
+- Process data piece by piece
+- Memory efficient for large data
+
+## Example: Creating a Simple Server
+
 
