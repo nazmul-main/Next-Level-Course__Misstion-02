@@ -7,11 +7,36 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 // ✅ Enable body parser
 app.use(express_1.default.json());
+app.use(express_1.default.text());
 //middleware
 const logger = (req, res, next) => {
     console.log(req.url, req.method, req.hostname);
     next();
 };
+//create course router
+const useRouter = express_1.default.Router();
+const courseRouter = express_1.default.Router();
+//use router
+app.use('/api/v1/users', useRouter);
+app.use('/api/v1/courses', courseRouter);
+useRouter.post('/create-user', (req, res) => {
+    const user = req.body;
+    console.log(user);
+    res.json({
+        success: true,
+        message: 'User is created successfully',
+        data: user
+    });
+});
+courseRouter.post('/inroll-course', (req, res) => {
+    const course = req.body;
+    console.log(course);
+    res.json({
+        success: true,
+        message: 'Course is inrolled successfully',
+        data: course
+    });
+});
 app.get('/', logger, (req, res) => {
     console.log(req.query);
     res.send('server is running!');
