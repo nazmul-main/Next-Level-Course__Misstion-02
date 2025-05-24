@@ -17,7 +17,7 @@ const PORT = 5000;
 let server;
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
-        const server = app_1.default.listen(PORT, () => {
+        server = app_1.default.listen(PORT, () => {
             console.log(`Example app listening on port ${PORT}`);
         });
     });

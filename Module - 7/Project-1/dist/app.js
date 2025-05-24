@@ -5,8 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
-const port = 3000;
-app.get('/', (req, res) => {
-    res.send('server is runing!');
+// ✅ Enable body parser
+app.use(express_1.default.json());
+//middleware
+const logger = (req, res, next) => {
+    console.log(req.url, req.method, req.hostname);
+    next();
+};
+app.get('/', logger, (req, res) => {
+    console.log(req.query);
+    res.send('server is running!');
+});
+app.post('/', (req, res) => {
+    console.log(req.body);
+    res.send('user is ');
 });
 exports.default = app;
