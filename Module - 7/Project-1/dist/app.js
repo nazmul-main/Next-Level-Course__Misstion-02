@@ -14,12 +14,12 @@ const logger = (req, res, next) => {
     next();
 };
 //create course router
-const useRouter = express_1.default.Router();
+const userRouter = express_1.default.Router();
 const courseRouter = express_1.default.Router();
 //use router
-app.use('/api/v1/users', useRouter);
+app.use('/api/v1/users', userRouter);
 app.use('/api/v1/courses', courseRouter);
-useRouter.post('/create-user', (req, res) => {
+userRouter.post('/create-user', (req, res) => {
     const user = req.body;
     console.log(user);
     res.json({
@@ -37,12 +37,36 @@ courseRouter.post('/inroll-course', (req, res) => {
         data: course
     });
 });
-app.get('/', logger, (req, res) => {
-    console.log(req.query);
-    res.send('server is running!');
+app.get('/', logger, (req, res, next) => {
+    try {
+        res.send('hello world');
+    }
+    catch (error) {
+        console.log(error);
+        next(error);
+    }
 });
 app.post('/', (req, res) => {
     console.log(req.body);
     res.send('user is ');
+});
+// Handle undefined routes (404)
+app.use((req, res, next) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found',
+        error: 'Route not found'
+    });
+});
+//global error handler
+app.use((error, req, res, next) => {
+    console.log(error);
+    if (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Something went wrong',
+            error: error.message
+        });
+    }
 });
 exports.default = app;

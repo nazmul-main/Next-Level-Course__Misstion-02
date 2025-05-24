@@ -1,3 +1,4 @@
+import { error } from 'console'
 import express, { NextFunction, Request, Response } from 'express'
 const app = express()
 
@@ -11,16 +12,14 @@ const logger = (req: Request, res: Response, next: NextFunction) => {
   next()
 }
 //create course router
-const useRouter = express.Router()
+const userRouter = express.Router()
 const courseRouter = express.Router()
 
 //use router
-app.use('/api/v1/users', useRouter)
+app.use('/api/v1/users', userRouter)
 app.use('/api/v1/courses', courseRouter)
 
-
-
-useRouter.post('/create-user', (req: Request, res: Response) => {
+userRouter.post('/create-user', (req: Request, res: Response) => {
   const user = req.body
   console.log(user);
   res.json({
@@ -29,6 +28,7 @@ useRouter.post('/create-user', (req: Request, res: Response) => {
     data: user
   })
 })
+
 
 courseRouter.post('/inroll-course', (req: Request, res: Response) => {
   const course = req.body
@@ -40,9 +40,14 @@ courseRouter.post('/inroll-course', (req: Request, res: Response) => {
   })
 })
 
-app.get('/', logger, (req: Request, res: Response) => {
-  console.log(req.query);
-  res.send('server is running!');
+app.get('/', logger, (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.send('hello world')
+  } catch (error) {
+    console.log(error); 
+    next(error)
+  }
+
 })
 
 app.post('/', (req: Request, res: Response) => {
@@ -50,4 +55,30 @@ app.post('/', (req: Request, res: Response) => {
   res.send('user is ')
 })
 
+
+// Handle undefined routes (404)
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+    error: 'Route not found'
+  });
+});
+
+
+
+//global error handler
+app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(error);
+  if (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong',
+      error: error.message
+    })
+  }
+
+})
+
 export default app
+  
